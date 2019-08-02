@@ -1,5 +1,6 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -18,34 +19,43 @@ public class TestClass {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("https://www.google.ru/?gws_rd=ssl");
-    }
+   }
 
     @Test(priority = 2)
     public void test1(){
+        driver.findElement(By.id("vbvc")).sendKeys("123");
         System.out.println("Test #1");
 
     }
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 2, enabled = false)
     public void test2(){
         System.out.println("Test #2");
     }
 
-    @Test(priority = 3, expectedExceptions = NullPointerException.class)
+    @Test(dependsOnMethods = "test1", alwaysRun = true)
+    public void test4(){
+        System.out.println("Test#4");
+    }
+
+    @Test(priority = 1, expectedExceptions = NullPointerException.class)
     public void test3(){
         Object ref = null;
         ref.toString();
         System.out.println("Test #3");
     }
 
+    @Test(priority = 4, invocationCount = 3)
+    public void test5(){
+        System.out.println("Test#5");
+    }
+
+
+
     @BeforeSuite
     public void beforeSuite(){
         System.out.println("Before suite");
     }
 
-    @AfterSuite
-    public void afterSuite(){
-        System.out.println("After Suite");
-    }
 
     @BeforeTest
     public void beforeTest(){
@@ -58,13 +68,13 @@ public class TestClass {
     }
 
     @AfterTest
-    public void afterMethod() throws IOException {
+    public void afterTest() throws IOException {
         TakesScreenshot scr = ((TakesScreenshot) driver);
         File file1 = scr.getScreenshotAs(OutputType.FILE);
 
         FileUtils.copyFile(file1, new File("K:\\test1.PNG"));
         System.out.println("Screenshot of the test is taken");
-        System.out.println("After method");
+        System.out.println("After test");
     }
 
 
