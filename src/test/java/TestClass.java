@@ -21,9 +21,29 @@ public class TestClass {
         driver.get("https://www.google.ru/?gws_rd=ssl");
    }
 
-    @Test(priority = 2)
+   @DataProvider(name = "testData")
+   public Object [][] test6data(){
+        Object [] [] data = new Object[3][2];
+
+        data [0][0]= "user1";
+        data [0][1] = "password1";
+
+        data [1][0]= "user2";
+        data [1][1] = "password2";
+
+        data [2][0]= "user3";
+        data [2][1] = "password3";
+        return data;
+   }
+
+   @Test(dataProvider = "testData")
+   public void test6(String username, String password){
+       System.out.println("test#6:" +username + " " + password);
+
+   }
+    @Test(description = "Test with exception", priority = 2)
     public void test1(){
-        driver.findElement(By.id("vbvc")).sendKeys("123");
+        driver.findElement(By.id("name")).sendKeys("123");
         System.out.println("Test #1");
 
     }
@@ -48,8 +68,6 @@ public class TestClass {
     public void test5(){
         System.out.println("Test#5");
     }
-
-
 
     @BeforeSuite
     public void beforeSuite(){
