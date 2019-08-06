@@ -1,0 +1,12 @@
+<suite name="TestSuite">
+<test name="Parameters test">
+    <parameter  name = "string 1st" value ="Two roads diverged in a yellow wood," />
+    <parameter  name = "string 2nd" value ="And sorry I could not travel both" />
+    <parameter  name = "string 3rd" value ="And be one traveler, long I stood" />
+    <parameter  name = "string 4th" value ="And looked down one as far as I could" />
+    <parameter  name = "string 5th" value ="To where it bent in the undergrowth." />
+    <classes>
+        <class name="ParameterTest" />
+    </classes>
+</test>
+</suite>
