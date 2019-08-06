@@ -1,3 +1,4 @@
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -15,9 +16,9 @@ public class ParameterTest {
         System.out.println(param);
     }
 
-    @Parameters({"string 4th", "string 5th"})
+    @Parameters({"string 4th", "string 5th", "string 6th"})
     @Test(priority = 2)
-    public void fourth_fifth_lines(String param, String param2){
-        System.out.println(param + "\n"+ param2);
+    public void fourth_fifth_lines(String param, String param2, @Optional ("Optional string") String param3){
+        System.out.println(param + "\n"+ param2 + "\n" + param3);
     }
 }
